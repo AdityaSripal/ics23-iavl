@@ -7,6 +7,12 @@ import (
 	"github.com/tendermint/iavl"
 )
 
+// Convert a proof from a iavl.ValueOp to a ExistenceProof
+// Must also take in the prehashed value to construct the Proof
+func ConvertIAVLValueOp(op iavl.ValueOp, value []byte) (*ics23.ExistenceProof, error) {
+	return convertExistenceProof(op.Proof, op.GetKey(), value)
+}
+
 // convertExistenceProof will convert the given proof into a valid
 // existence proof, if that's what it is.
 //
